@@ -71,7 +71,11 @@
         </div>
         <div id="msgs">
             <ul>
-                <li>If something happened, I would tell you here</li>
+                <li
+                    ng-repeat="msg in mod.msgs"
+                >
+                    {{ msg }}
+                </li>
             </ul>
         </div>
         <div id="results">
@@ -80,7 +84,7 @@
                 <input type="button" value="Draw" />
                 <div></div>
                 <label>Winner:</label>
-                <span>Joe Blow</span>
+                <span>{{ mod.winner.fname }} {{ mod.winner.lname }}</span>
             </fieldset>
         </div>
         <div id="entry">
@@ -88,25 +92,25 @@
                 <!-- using empty divs as spacers, as cannot assign size to br/ -->
                 <legend>Participant Entry</legend>
                 <label for="fname">First Name:</label>
-                <input id="fname" width="20" value="Joe">
+                <input id="fname" width="20"
+                   ng-model="mod.entry.fname"
+                >
                 <div></div>
                 <label for="lname">Last Name:</label>
-                <input id="lname" width="20" value="Blow">
+                <input id="lname" width="20"
+                   ng-model="mod.entry.lname"
+                >
                 <div></div>
                 <label for="tickets">Number of Tickets:</label>
-                <select id="tickets">
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option selected="selected">3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                </select>
+                <!--
+                    see
+                    https://www.undefinednull.com/2014/08/11/a-brief-walk-through-of-the-ng-options-in-angularjs/
+                    as the Angular documentation for ngOptions / ng-options is somewhat opaque.
+                -->
+                <select id="tickets"
+                    ng-model="mod.entry.tickets"
+                    ng-options="num for num in [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]"
+                > </select>
                 <div></div>
                 <input type="button" value="Delete" />
             </fieldset>
@@ -123,20 +127,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="font-size: 1.25em; font-weight: bold;">
-                            <td>Joe</td>
-                            <td>Blow</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>Susan</td>
-                            <td>Queue</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>Lucky</td>
-                            <td>Strikes</td>
-                            <td>7</td>
+                        <!-- TODO: style="font-size: 1.25em; font-weight: bold;" on selected row -->
+                        <tr
+                            ng-repeat="entrant in mod.entrants"
+                        >
+                            <td>{{ entrant.fname }}</td>
+                            <td>{{ entrant.lname }}</td>
+                            <td>{{ entrant.tickets }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
