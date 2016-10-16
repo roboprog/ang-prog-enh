@@ -6,7 +6,8 @@ The demonstration resolves around being done in several phases.
 Each phase is simulated by having a branch in the repository,
 with the files as they would appear within that branch.
 
-**NOTE** - these branches have not been created yet.
+**NOTE** - the only branch with work on it is "view",
+the others have not been created yet.
 
 ## Branches
 
