@@ -6,14 +6,66 @@
             <h1>Raffle Demo</h1>
         </div>
         <div id="msgs">
+            <ul>
+                <li>If something happened, I would tell you here</li>
+            </ul>
         </div>
         <div id="results">
+            <fieldset>
+                <legend>Results</legend>
+                <input type="button" value="Draw" />
+                <br/>
+                <label>Winner:</label>
+                <p>Joe Blow</p>
+            </fieldset>
         </div>
         <div id="entry">
+            <fieldset>
+                <legend>Participant Entry</legend>
+                <label>First Name</label>
+                <input value="Joe">
+                <label>Last Name</label>
+                <input value="Blow">
+                <label>Number of Tickets</label>
+                <input value="5">
+                <input type="button" value="Delete" />
+            </fieldset>
         </div>
         <div id="list">
+            <fieldset>
+                <legend>Participants</legend>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Number of Tickets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Joe</td>
+                            <td>Blow</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Susan</td>
+                            <td>Queue</td>
+                            <td>2</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                <input type="button" value="Add" />
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </fieldset>
         </div>
         <div id="ftr">
+            <p>Copyright 2016, AcmeCorp, void where prohibited by law...</p>
         </div>
     </body>
 </html>
