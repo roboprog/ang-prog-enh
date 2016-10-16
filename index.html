@@ -23,6 +23,20 @@
             fieldset div {
                 padding: 0.15em ;
             }
+            table {
+                width: 95% ;
+            }
+            tbody tr:nth-child(odd) {
+                background-color: #dfd ;
+            }
+            tbody tr:nth-child(even) {
+                background-color: #ffe ;
+            }
+            th,
+                    td {
+                width: 50% ;
+                text-align: center ;
+            }
             div#hdr {
                 background-color: lightsalmon ;
             }
@@ -102,7 +116,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr style="font-size: 1.25em; font-weight: bold;">
                             <td>Joe</td>
                             <td>Blow</td>
                             <td>3</td>
@@ -111,6 +125,11 @@
                             <td>Susan</td>
                             <td>Queue</td>
                             <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Lucky</td>
+                            <td>Strikes</td>
+                            <td>7</td>
                         </tr>
                     </tbody>
                     <tfoot>
