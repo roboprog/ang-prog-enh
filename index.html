@@ -1,7 +1,14 @@
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js">
+        </script>
+        <script src="app.js" >
+        </script>
     </head>
-    <body>
+    <body
+        ng-app="demo"
+        ng-controller="demoCtrl"
+    >
         <!-- note: background colors are "a bit" exaggerated to differentiate sections -->
         <style>
             * {
@@ -143,7 +150,10 @@
             </fieldset>
         </div>
         <div id="ftr">
-            <p>Copyright 2016, AcmeCorp, void where prohibited by law...</p>
+            <p>
+                Copyright {{ mod.meta.cr_yr }}, {{ mod.meta.corp_alias }},
+                void where prohibited by law...
+            </p>
         </div>
     </body>
 </html>
