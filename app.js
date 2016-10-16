@@ -28,6 +28,9 @@
             /** message list */
             msgs: [],
 
+            /** raffle winner */
+            winner: {},  // see below
+
             /** form entry buffer */
             entry: {},  // see below
 
