@@ -55,7 +55,7 @@
      */
     var controller_init = function ( mod ) {
 
-        // exported below
+        /** run the raffle, randomly select a winner */
         var run_raffle = function () {
             var basket
 
@@ -88,12 +88,18 @@
             ]
         }
 
+        /**
+         * select the indicated row
+         * @param $index {Number} - 0 based row index
+         */
+        var sel_row = function ( $index ) {
+            mod.entry = mod.entrants[ $index ]  // alias
+        }
+
         // export controller methods (functions)
         return {
-
-            /** run the raffle, randomly select a winner */
             run_raffle,
-
+            sel_row,
         }
     }
 
@@ -113,7 +119,6 @@
 
         // other one-time setup here...
         $scope.mod.msgs.push( 'If something happened, I would tell you here' )
-        $scope.mod.entry = $scope.mod.entrants[ 0 ]  // alias
     }
 
     // now that we have some code defined (out-of-line), let's start up Angular with it.

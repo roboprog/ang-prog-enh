@@ -134,6 +134,7 @@
                         <!-- TODO: style="font-size: 1.25em; font-weight: bold;" on selected row -->
                         <tr
                             ng-repeat="entrant in mod.entrants"
+                            ng-click="ctl.sel_row( $index )"
                         >
                             <td>{{ entrant.fname }}</td>
                             <td>{{ entrant.lname }}</td>
