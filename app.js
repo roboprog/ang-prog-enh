@@ -99,6 +99,18 @@
             mod.entry = mod.entrants[ $index ]  // alias
         }
 
+        /**
+         * Return the style-object for ng-style depending on row selection.
+         * @param $index {Number} - 0 based row index
+         */
+        var get_row_style = function ( $index ) {
+            return ( mod.entry === mod.entrants[ $index ] ) ?
+                {
+                    'font-size': '1.25em',
+                    'font-weight': 'bold',
+                } : {}
+        }
+
         /** delete the currently selected participant row */
         var del = function () {
             mod.entrants = R.filter( ( entrant ) =>
@@ -122,6 +134,7 @@
         return {
             run_raffle,
             sel_row,
+            get_row_style,
             del,
             add,
         }

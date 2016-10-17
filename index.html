@@ -135,10 +135,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- TODO: style="font-size: 1.25em; font-weight: bold;" on selected row -->
                         <tr
                             ng-repeat="entrant in mod.entrants"
                             ng-click="ctl.sel_row( $index )"
+                            ng-style="ctl.get_row_style( $index )"
                         >
                             <td>{{ entrant.fname }}</td>
                             <td>{{ entrant.lname }}</td>
