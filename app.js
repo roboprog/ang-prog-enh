@@ -17,6 +17,9 @@
         // initialize some data in our model
         return {
 
+            /** number of tickets option list */
+            ticket_opts: R.range( 0, 11 ),
+
             /** metadata for page header/footer */
             meta: {
 
@@ -54,7 +57,35 @@
 
         // exported below
         var run_raffle = function () {
-            alert( 'TODO' )
+            var basket
+
+            /**
+             * Expand an entrant's entry N times, based upon number of tickets.
+             * @param entrant - the raffle entrant record
+             */
+            var expander = function ( entrant ) {
+                return R.map( ( ignore ) => entrant )(
+                    R.range( 0, entrant.tickets )
+                )
+            }
+
+            /**
+             * Return a random integer between 0 to N-1
+             * @param limit - the N which the result must be less than
+             */
+            var bounded_rand_whole = function ( limit ) {
+                return Math.floor(
+                    Math.random() * limit
+                )
+            }
+
+            // TODO: generate some drama!
+
+            // basket of entries - N tickets per entrant
+            basket = R.flatten( R.map( expander, mod.entrants ) )
+            mod.winner = basket[
+                bounded_rand_whole( basket.length )
+            ]
         }
 
         // export controller methods (functions)
@@ -83,7 +114,6 @@
         // other one-time setup here...
         $scope.mod.msgs.push( 'If something happened, I would tell you here' )
         $scope.mod.entry = $scope.mod.entrants[ 0 ]  // alias
-        $scope.mod.winner = $scope.mod.entrants[ 0 ]  // alias
     }
 
     // now that we have some code defined (out-of-line), let's start up Angular with it.
