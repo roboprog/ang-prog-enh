@@ -9,11 +9,13 @@
 ( function () {
     var module
 
-    module = angular.module( 'demo', [ ] )
-    module.controller( 'demoCtrl', function ( $scope ) {
+    /**
+     * Define the overal structure, and some initial content for our model(s).
+     */
+    var model_init = function () {
 
         // initialize some data in our model
-        $scope.mod = {
+        return {
 
             /** metadata for page header/footer */
             meta: {
@@ -42,11 +44,28 @@
             ],
 
         }
+    }
 
+    /**
+     * Initialize application specific resources (model, controller)
+     *  on the container object provided by Angular.
+     * @param $scope - an object, provided by the Angular library,
+     *      on which to hang our data and code.
+     */
+    var scope_init = function ( $scope ) {
+
+        // initialize some data in our model
+        $scope.mod = model_init()
+
+        // other one-time setup here...
         $scope.mod.msgs.push( 'If something happened, I would tell you here' )
         $scope.mod.entry = $scope.mod.entrants[ 0 ]  // alias
         $scope.mod.winner = $scope.mod.entrants[ 0 ]  // alias
-    } )
+    }
+
+    // now that we have some code defined (out-of-line), let's start up Angular with it.
+    module = angular.module( 'demo', [ ] )
+    module.controller( 'demoCtrl', scope_init )
 } )()
 
 
