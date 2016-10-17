@@ -64,7 +64,9 @@
              * @param entrant - the raffle entrant record
              */
             var expander = function ( entrant ) {
-                return R.map( ( ignore ) => entrant )(
+                return R.map( ( ignore ) =>
+                    entrant
+                )(
                     R.range( 0, entrant.tickets )
                 )
             }
@@ -96,10 +98,19 @@
             mod.entry = mod.entrants[ $index ]  // alias
         }
 
+        /** delete the currently selected participant row */
+        var del = function () {
+            mod.entrants = R.filter( ( entrant ) =>
+                ( mod.entry !== entrant )  // skip the one that was in the form
+            )( mod.entrants )
+            mod.entry = {}
+        }
+
         // export controller methods (functions)
         return {
             run_raffle,
             sel_row,
+            del,
         }
     }
 

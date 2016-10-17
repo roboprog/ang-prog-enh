@@ -116,7 +116,9 @@
                     ng-options="num for num in mod.ticket_opts"
                 > </select>
                 <div></div>
-                <input type="button" value="Delete" />
+                <input type="button" value="Delete"
+                   ng-click="ctl.del()"
+                />
             </fieldset>
         </div>
         <div id="list">
@@ -124,7 +126,9 @@
                 <legend>Participants</legend>
                 <table>
                     <thead>
-                        <tr>
+                        <tr
+                            ng-show="mod.entrants.length"
+                        >
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Number of Tickets</th>
