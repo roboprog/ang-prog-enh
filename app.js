@@ -52,8 +52,9 @@
     /**
      * Return the controller's event handlers and other supporting functions/objects.
      * @param mod - value object containing model(s) for the view.
+     * @param $window - Angular wrapper service around JS window global
      */
-    var controller_init = function ( mod ) {
+    var controller_init = function ( mod, $window ) {
 
         /** run the raffle, randomly select a winner */
         var run_raffle = function () {
@@ -106,11 +107,23 @@
             mod.entry = {}
         }
 
+        /** add a new entry in the participant table and edit it */
+        var add = function () {
+            mod.entrants.push( {} )
+            mod.entry = mod.entrants[
+                mod.entrants.length - 1
+            ]
+            $window.document.getElementById(
+                'fname'
+            ).focus()
+        }
+
         // export controller methods (functions)
         return {
             run_raffle,
             sel_row,
             del,
+            add,
         }
     }
 
@@ -120,13 +133,13 @@
      * @param $scope - an object, provided by the Angular library,
      *      on which to hang our data and code.
      */
-    var scope_init = function ( $scope ) {
+    var scope_init = function ( $scope, $window ) {
 
         // initialize some data in our model
         $scope.mod = model_init()
 
         // initial controller event handlers and such
-        $scope.ctl = controller_init( $scope.mod )
+        $scope.ctl = controller_init( $scope.mod, $window )
 
         // other one-time setup here...
         $scope.mod.msgs.push( 'If something happened, I would tell you here' )
