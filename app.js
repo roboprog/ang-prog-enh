@@ -47,6 +47,26 @@
     }
 
     /**
+     * Return the controller's event handlers and other supporting functions/objects.
+     * @param mod - value object containing model(s) for the view.
+     */
+    var controller_init = function ( mod ) {
+
+        // exported below
+        var run_raffle = function () {
+            alert( 'TODO' )
+        }
+
+        // export controller methods (functions)
+        return {
+
+            /** run the raffle, randomly select a winner */
+            run_raffle,
+
+        }
+    }
+
+    /**
      * Initialize application specific resources (model, controller)
      *  on the container object provided by Angular.
      * @param $scope - an object, provided by the Angular library,
@@ -56,6 +76,9 @@
 
         // initialize some data in our model
         $scope.mod = model_init()
+
+        // initial controller event handlers and such
+        $scope.ctl = controller_init( $scope.mod )
 
         // other one-time setup here...
         $scope.mod.msgs.push( 'If something happened, I would tell you here' )

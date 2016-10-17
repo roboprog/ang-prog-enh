@@ -81,7 +81,9 @@
         <div id="results">
             <fieldset>
                 <legend>Results</legend>
-                <input type="button" value="Draw" />
+                <input type="button" value="Draw"
+                   ng-click="ctl.run_raffle()"
+                />
                 <div></div>
                 <label>Winner:</label>
                 <span>{{ mod.winner.fname }} {{ mod.winner.lname }}</span>
