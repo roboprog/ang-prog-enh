@@ -39,12 +39,8 @@
             /** form entry buffer */
             entry: {},  // see below
 
-            /** (temp) list of participants / contestants (to be loaded from server) */
-            entrants: [
-                { fname: 'Joe', lname: 'Blow', tickets: 3 },
-                { fname: 'Susan', lname: 'Queue', tickets: 2 },
-                { fname: 'Lucky', lname: 'Strikes', tickets: 7 }
-            ],
+            /** list of participants / contestants (to be loaded from server) */
+            entrants: [],
 
         }
     }
@@ -173,8 +169,9 @@
      * @param $window - Angular wrapper service around JS window global
      * @param $timeout - Angular wrapper service around JS window.setTimeout
      *      (which triggers view update)
+     * @param $http - Angular wrapper around XMLHttpRequest (xhr) access.
      */
-    var scope_init = function ( $window, $timeout ) {
+    var scope_init = function ( $window, $timeout, $http ) {
         var $scope = this  // a convenient alias
 
         // initialize some data in our model
@@ -184,7 +181,29 @@
         $scope.ctl = controller_init( $scope.mod, $window, $timeout )
 
         // other one-time setup here...
-        $scope.ctl.add_msg( 'If something happened, I would tell you here' )
+        ; ( function () {
+
+            /** process content of successful REST request */
+            var happy_handler = function ( resp ) {
+                $scope.mod.entrants = resp.data.entrants
+            }
+
+            /** deal with errors */
+            var fail_handler = function ( resp ) {
+                $scope.ctl.add_msg(
+                    'Remote data access error: ' + resp.status +
+                    ': ' + resp.statusText
+                )
+            }
+
+            $http.get(
+                'entrants.json'  // or other URI
+            ).then(
+                happy_handler,
+                fail_handler
+                // "finally" analog here, if any
+            )
+        } )()
     }
 
     // now that we have some code defined (out-of-line), let's start up Angular with it.
