@@ -169,13 +169,13 @@
     /**
      * Initialize application specific resources (model, controller)
      *  on the container object provided by Angular.
-     * @param $scope - an object, provided by the Angular library,
-     *      on which to hang our data and code.
+     * @constructor
      * @param $window - Angular wrapper service around JS window global
      * @param $timeout - Angular wrapper service around JS window.setTimeout
      *      (which triggers view update)
      */
-    var scope_init = function ( $scope, $window, $timeout ) {
+    var scope_init = function ( $window, $timeout ) {
+        var $scope = this  // a convenient alias
 
         // initialize some data in our model
         $scope.mod = model_init()

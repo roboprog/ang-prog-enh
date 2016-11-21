@@ -9,7 +9,7 @@
     </head>
     <body
         ng-app="demo"
-        ng-controller="demoCtrl"
+        ng-controller="demoCtrl as raffle"
     >
         <!-- note: background colors are "a bit" exaggerated to differentiate sections -->
         <style>
@@ -74,7 +74,7 @@
         <div id="msgs">
             <ul>
                 <li
-                    ng-repeat="msg in mod.msgs"
+                    ng-repeat="msg in raffle.mod.msgs"
                 >
                     {{ msg }}
                 </li>
@@ -84,11 +84,11 @@
             <fieldset>
                 <legend>Results</legend>
                 <input type="button" value="Draw"
-                   ng-click="ctl.run_raffle()"
+                   ng-click="raffle.ctl.run_raffle()"
                 />
                 <div></div>
                 <label>Winner:</label>
-                <span>{{ mod.winner.fname }} {{ mod.winner.lname }}</span>
+                <span>{{ raffle.mod.winner.fname }} {{ raffle.mod.winner.lname }}</span>
             </fieldset>
         </div>
         <div id="entry">
@@ -97,12 +97,12 @@
                 <legend>Participant Entry</legend>
                 <label for="fname">First Name:</label>
                 <input id="fname" width="20"
-                   ng-model="mod.entry.fname"
+                   ng-model="raffle.mod.entry.fname"
                 >
                 <div></div>
                 <label for="lname">Last Name:</label>
                 <input id="lname" width="20"
-                   ng-model="mod.entry.lname"
+                   ng-model="raffle.mod.entry.lname"
                 >
                 <div></div>
                 <label for="tickets">Number of Tickets:</label>
@@ -112,12 +112,12 @@
                     as the Angular documentation for ngOptions / ng-options is somewhat opaque.
                 -->
                 <select id="tickets"
-                    ng-model="mod.entry.tickets"
-                    ng-options="num for num in mod.ticket_opts"
+                    ng-model="raffle.mod.entry.tickets"
+                    ng-options="num for num in raffle.mod.ticket_opts"
                 > </select>
                 <div></div>
                 <input type="button" value="Delete"
-                   ng-click="ctl.del()"
+                   ng-click="raffle.ctl.del()"
                 />
             </fieldset>
         </div>
@@ -127,7 +127,7 @@
                 <table>
                     <thead>
                         <tr
-                            ng-show="mod.entrants.length"
+                            ng-show="raffle.mod.entrants.length"
                         >
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -136,9 +136,9 @@
                     </thead>
                     <tbody>
                         <tr
-                            ng-repeat="entrant in mod.entrants"
-                            ng-click="ctl.sel_row( $index )"
-                            ng-style="ctl.get_row_style( $index )"
+                            ng-repeat="entrant in raffle.mod.entrants"
+                            ng-click="raffle.ctl.sel_row( $index )"
+                            ng-style="raffle.ctl.get_row_style( $index )"
                         >
                             <td>{{ entrant.fname }}</td>
                             <td>{{ entrant.lname }}</td>
@@ -149,7 +149,7 @@
                         <tr>
                             <th>
                                 <input type="button" value="Add"
-                                   ng-click="ctl.add()"
+                                   ng-click="raffle.ctl.add()"
                                 />
                             </th>
                         </tr>
@@ -159,7 +159,7 @@
         </div>
         <div id="ftr">
             <p>
-                Copyright {{ mod.meta.cr_yr }}, {{ mod.meta.corp_alias }},
+                Copyright {{ raffle.mod.meta.cr_yr }}, {{ raffle.mod.meta.corp_alias }},
                 void where prohibited by law...
             </p>
         </div>
