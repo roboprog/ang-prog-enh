@@ -6,8 +6,8 @@ The demonstration resolves around being done in several phases.
 Each phase is simulated by having a branch in the repository,
 with the files as they would appear within that branch.
 
-**NOTE** - the branches with work on them are "view" and "model",
-the others have not been created yet.
+**NOTE** - the branches with work on them are "view", "model" and "controler",
+"rest" has not been created yet.
 
 ## Branches
 
@@ -21,6 +21,8 @@ There are still no event handlers - it's little more than a busy-box.
 
 * *controller*: define the (Angular) JS event handlers for the page,
 so that the controller actually does something.
+Also, give the controller a name, to hint at how multiple
+controllers can be used on more complex pages.
 
 * *rest*: pull in the Angular $http service
 to at least *read* some data from the server.
