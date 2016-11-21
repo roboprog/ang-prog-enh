@@ -53,8 +53,20 @@
      * Return the controller's event handlers and other supporting functions/objects.
      * @param mod - value object containing model(s) for the view.
      * @param $window - Angular wrapper service around JS window global
+     * @param $timeout - Angular wrapper service around JS window.setTimeout
+     *      (which triggers view update)
      */
-    var controller_init = function ( mod, $window ) {
+    var controller_init = function ( mod, $window, $timeout ) {
+
+        /** clear message list */
+        var clear_msgs = function () {
+            mod.msgs = []
+        }
+
+        /** add a message to show */
+        var add_msg = function ( msg ) {
+            mod.msgs.push( msg )
+        }
 
         /** run the raffle, randomly select a winner */
         var run_raffle = function () {
@@ -82,13 +94,25 @@
                 )
             }
 
-            // TODO: generate some drama!
+            clear_msgs()
+            add_msg( 'Selecting raffle winner...' )
+            mod.winner = ''
 
             // basket of entries - N tickets per entrant
             basket = R.flatten( R.map( expander, mod.entrants ) )
-            mod.winner = basket[
-                bounded_rand_whole( basket.length )
-            ]
+            add_msg( 'Sifting through ' + basket.length + ' tickets...' )
+
+            // pretend this takes time...
+            $timeout(
+                function () {
+                    clear_msgs()
+                    add_msg( 'We have a winner!' )
+                    mod.winner = basket[
+                        bounded_rand_whole( basket.length )
+                    ]
+                },
+                3000
+            )
         }
 
         /**
@@ -132,6 +156,8 @@
 
         // export controller methods (functions)
         return {
+            clear_msgs,
+            add_msg,
             run_raffle,
             sel_row,
             get_row_style,
@@ -145,17 +171,20 @@
      *  on the container object provided by Angular.
      * @param $scope - an object, provided by the Angular library,
      *      on which to hang our data and code.
+     * @param $window - Angular wrapper service around JS window global
+     * @param $timeout - Angular wrapper service around JS window.setTimeout
+     *      (which triggers view update)
      */
-    var scope_init = function ( $scope, $window ) {
+    var scope_init = function ( $scope, $window, $timeout ) {
 
         // initialize some data in our model
         $scope.mod = model_init()
 
         // initial controller event handlers and such
-        $scope.ctl = controller_init( $scope.mod, $window )
+        $scope.ctl = controller_init( $scope.mod, $window, $timeout )
 
         // other one-time setup here...
-        $scope.mod.msgs.push( 'If something happened, I would tell you here' )
+        $scope.ctl.add_msg( 'If something happened, I would tell you here' )
     }
 
     // now that we have some code defined (out-of-line), let's start up Angular with it.
