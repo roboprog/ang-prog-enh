@@ -6,9 +6,6 @@ The demonstration resolves around being done in several phases.
 Each phase is simulated by having a branch in the repository,
 with the files as they would appear within that branch.
 
-**NOTE** - the branches with work on them are "view", "model" and "controler",
-"rest" has not been created yet.
-
 ## Branches
 
 * *view*: shows just the HTML file,
